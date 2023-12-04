@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
@@ -10,14 +9,20 @@ const createPost = async (postData, jwt) => {
         Authorization: `Bearer ${jwt}`,
       },
     });
-  if(response.status===201){
+
+    if (response.status >= 200 && response.status < 300) {
+      // Success status code (2xx range)
       return response.data;
-    }else{
-      return 405;
+    } else {
+      // Handle non-success status code
+      return 405; // You may want to handle this differently based on your requirements
     }
-    
-  }catch(error){
+
+  } catch (error) {
     console.log(error);
+    // You might want to throw the error here to propagate it to the calling code
+    throw error;
   }
 }
+
 export default createPost;
