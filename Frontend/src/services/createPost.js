@@ -1,8 +1,4 @@
-import axios from "axios";
 
-const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
-
-axios.defaults.baseURL = `${BASE_URL}api/`;
 
 const createPost = async (postData, jwt) => {
   if (!jwt) {
@@ -10,21 +6,24 @@ const createPost = async (postData, jwt) => {
   }
 
   try {
-    const response = await axios.post("/post", postData, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}api/post`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
       },
+      body: JSON.stringify(postData),
     });
 
-    // Assuming a successful response has a specific property (e.g., success)
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      // Handle other response scenarios as needed
-      const errorMessage = response.data.message || "Error desconocido al crear el post";
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      const errorMessage =
+        errorResponse.message || "Error desconocido al crear el post";
       throw new Error(`Error al crear el post: ${errorMessage}`);
     }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.error("Error al crear el post:", error.message);
     throw error;
@@ -32,5 +31,3 @@ const createPost = async (postData, jwt) => {
 };
 
 export default createPost;
-
-
