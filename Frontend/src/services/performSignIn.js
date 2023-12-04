@@ -29,3 +29,5 @@ export const performSignIn = async ({ email, password, username }) => {
     throw error;
   }
 };
+
+export default performSignIn;
