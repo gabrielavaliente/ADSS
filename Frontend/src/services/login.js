@@ -7,7 +7,7 @@ axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 export const login = async ({identifier,password})=>{
   try{
     const response = await axios.post("/auth/login/",{identifier,password});
-    if(response.status===200){
+    if(response.status===204){
       return response.data;
     }else{
       return 404;
