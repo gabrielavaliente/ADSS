@@ -17,3 +17,4 @@ export const createPost = async (postData, jwt) => {
   }
 }
   
+export default createPost;
