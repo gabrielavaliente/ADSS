@@ -1,16 +1,12 @@
 import axios from "axios";
-import { login } from "./login.js"; 
 
 axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
-const createPost = async (postData) => {
+const createPost = async (postData, jwt) => {
   try {
-    // Replace with actual values or remove comments
-    const jwtToken = await login({ identifier:, password:});
-
     const response = await axios.post("/post", postData, {
       headers: {
-        Authorization: "Bearer " + jwtToken,
+        Authorization: `Bearer ${jwt}`,
       },
     });
 
