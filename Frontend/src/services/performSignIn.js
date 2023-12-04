@@ -1,30 +1,31 @@
+import axios from "axios";
+
 const BASE_URL = `${import.meta.env.VITE_API_URL}/api/`;
 
-function performSignIn({ email, password, username }) {
+axios.defaults.baseURL = BASE_URL;
+
+export const performSignIn = async ({ email, password, username }) => {
   console.log("Submitting sign-in form...");
 
-  return fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password, username }),
-  })
-    .then((res) => {
-      if (!res.ok) {
-        console.error("Error:", res.status, res.statusText);
-        throw new Error("Response is not good");
-      }
-      return res.json();
-    })
-    .then((res) => {
-      console.log("Received response:", res);
-      return { success: true };
-    })
-    .catch((error) => {
-      console.error("Sign-in error:", error.message);
-      throw error;
+  try {
+    const response = await axios.post("/auth/register", {
+      email,
+      password,
+      username,
     });
-}
 
-export default performSignIn;
+    console.log("Received response:", response.data);
+
+    // Assuming a successful response has a specific property (e.g., success)
+    if (response.data.success) {
+      return { success: true };
+    } else {
+      // Handle other response scenarios as needed
+      console.error("Error in response:", response.data);
+      throw new Error("Response is not good");
+    }
+  } catch (error) {
+    console.error("Sign-in error:", error.message);
+    throw error;
+  }
+};
