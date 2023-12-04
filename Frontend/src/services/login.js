@@ -1,5 +1,7 @@
 //const ENDPOINT = 'http://localhost:3501/api'
 
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 function login({ identifier, password }) {
   console.log("Submitting login form...");
   return fetch(`${import.meta.env.VITE_API_URL}api/auth/login`, {
