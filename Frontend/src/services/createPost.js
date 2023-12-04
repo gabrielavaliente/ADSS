@@ -2,13 +2,15 @@ import axios from "axios";
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
 
+axios.defaults.baseURL = `${BASE_URL}api/`;
+
 const createPost = async (postData, jwt) => {
   if (!jwt) {
     throw new Error("No hay un token JWT válido");
   }
 
   try {
-    const response = await axios.post(`${BASE_URL}post`, postData, {
+    const response = await axios.post("/post", postData, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
@@ -30,3 +32,5 @@ const createPost = async (postData, jwt) => {
 };
 
 export default createPost;
+
+
