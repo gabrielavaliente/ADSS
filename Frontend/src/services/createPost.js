@@ -6,21 +6,20 @@ const createPost = async (postData, jwt) => {
   try {
     console.log("JWT Token:", jwt);
     const response = await axios.post("/post", postData, {
-  headers: {
-    Authorization: `Bearer ${jwt}`,
-  },
-});
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
 
-    if (response.status >= 200 && response.status < 300) {
-      return response.data;
-    } else {
-      console.error(`Error al crear el post: ${response.status}`);
-      return 405;
-    }
+    // Axios lanzará una excepción si la respuesta no es satisfactoria
+    // Así que no necesitas verificar manualmente el código de estado aquí
+
+    // No es necesario llamar a response.data, ya que Axios ya lo hace automáticamente
+    return response.data;
 
   } catch (error) {
     console.error("Error al crear el post:", error.message);
-    throw error;
+    throw error; // Puedes lanzar el error nuevamente para que la función llamadora pueda manejarlo si es necesario
   }
 };
 
