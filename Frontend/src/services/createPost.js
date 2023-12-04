@@ -1,27 +1,19 @@
+
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
 import axios from "axios";
+axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
-const createPost = async (postData, jwt) => {
-  if (!jwt) {
-    throw new Error("No hay un token JWT válido");
+export const createPost = async (postData, jwt) => {
+  try{
+    const response = await axios.post("/post", postData);
+    if(response.status===200){
+      return response.data;
+    }else{
+      return 404;
+    }
+
+  }catch(error){
+    console.log(error);
   }
-
-  try {
-    console.log("JWT Token:", jwt);
-
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/post`, postData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-    });
-
-    console.log("Response Data:", response.data);
-
-    return response.data;
-  } catch (error) {
-    console.error("Error al crear el post:", error.message);
-    throw error;
-  }
-};
-
-export default createPost;
+}
+  
