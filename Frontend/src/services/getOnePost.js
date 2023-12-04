@@ -1,3 +1,5 @@
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 const getOnePost = async (postId, jwt) => {
   try {
     const response = await fetch(
