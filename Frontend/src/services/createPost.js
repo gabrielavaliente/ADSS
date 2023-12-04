@@ -5,13 +5,11 @@ axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
 const createPost = async (postData) => {
   try {
-    // Call the login function to obtain the JWT token
     const jwtToken = await login({ identifier: /* username */, password: /* password */ });
 
-    // Use the obtained token for creating the post
     const response = await axios.post("/post", postData, {
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
+        Authorization: "Bearer " + jwtToken,
       },
     });
 
@@ -29,3 +27,4 @@ const createPost = async (postData) => {
 };
 
 export default createPost;
+
