@@ -1,13 +1,12 @@
-
-
 const createProduct = async (productData, jwt) => {
-  if (!jwt) {
-    throw new Error("No hay un token JWT válido");
-  }
-
   try {
+    if (!jwt) {
+      throw new Error("No hay un token JWT válido");
+    }
 
-console.log('JWT Token:', jwt);
+    // Log JWT Token
+    console.log('JWT Token:', jwt);
+
     const response = await fetch(`${import.meta.env.VITE_API_URL}api/product`, {
       method: "POST",
       headers: {
@@ -16,6 +15,12 @@ console.log('JWT Token:', jwt);
       },
       body: JSON.stringify(productData),
     });
+
+    // Log Request and Response
+    console.log('Request Headers:', JSON.stringify(response.headers));
+    console.log('Request Payload:', JSON.stringify(productData));
+    console.log('Response Headers:', JSON.stringify(response.headers));
+    console.log('Response Body:', await response.json());
 
     if (!response.ok) {
       const errorResponse = await response.json();
