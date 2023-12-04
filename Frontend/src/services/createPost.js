@@ -5,7 +5,8 @@ axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
 const createPost = async (postData) => {
   try {
-    const jwtToken = await login({ identifier: /* username */, password: /* password */ });
+    // Replace with actual values or remove comments
+    const jwtToken = await login({ identifier:, password:});
 
     const response = await axios.post("/post", postData, {
       headers: {
