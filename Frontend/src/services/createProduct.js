@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 
 const createProduct = async (productData, jwt) => {
   if (!jwt) {
