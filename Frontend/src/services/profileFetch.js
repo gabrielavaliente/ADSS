@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Context from "../context/Usercontext";
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 
 const profileFetch = () => {
   const { jwt } = useContext(Context);
