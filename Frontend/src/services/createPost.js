@@ -1,6 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
 import axios from "axios";
-axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
 const createPost = async (postData, jwt) => {
   if (!jwt) {
@@ -8,23 +6,20 @@ const createPost = async (postData, jwt) => {
   }
 
   try {
-    console.log("Request Headers:", {
-  "Content-Type": "application/json",
-  Authorization: `Bearer ${jwt}`,
-});
+    console.log("JWT Token:", jwt);
 
-const response = await axios.post(`${import.meta.env.VITE_API_URL}api/post`, postData, {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${jwt}`,
-  },
-});
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/post`, postData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
 
+    console.log("Response Data:", response.data);
 
-    // Axios automatically checks for response.ok, so you can simplify the code
     return response.data;
   } catch (error) {
-    console.error(error.message);
+    console.error("Error al crear el post:", error.message);
     throw error;
   }
 };
