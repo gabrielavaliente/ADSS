@@ -18,7 +18,7 @@ const createPost = async (postData, jwt) => {
     // Axios automatically checks for response.ok, so you can simplify the code
     return response.data;
   } catch (error) {
-    console.error("Error al crear el post:", error.message);
+    console.error(error.message);
     throw error;
   }
 };
