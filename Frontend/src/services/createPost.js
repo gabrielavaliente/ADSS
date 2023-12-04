@@ -8,12 +8,18 @@ const createPost = async (postData, jwt) => {
   }
 
   try {
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/post`, postData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-    });
+    console.log("Request Headers:", {
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${jwt}`,
+});
+
+const response = await axios.post(`${import.meta.env.VITE_API_URL}api/post`, postData, {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${jwt}`,
+  },
+});
+
 
     // Axios automatically checks for response.ok, so you can simplify the code
     return response.data;
