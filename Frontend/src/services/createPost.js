@@ -12,9 +12,11 @@ export const createPost = async (postData, jwt) => {
       return 404;
     }
 
-  }catch(error){
-    console.log(error);
-  }
+  }catch (error) {
+  console.error("Error al crear el post:", error.message);
+  console.error("Axios Error Object:", error);
+  throw error;
+}
 }
   
 export default createPost;
