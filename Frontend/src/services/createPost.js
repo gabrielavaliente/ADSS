@@ -2,7 +2,7 @@ import axios from "axios";
 
 axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
-const createPost = async (postData, jwt) => {
+export const createPost = async (postData, jwt) => {
   try {
     const response = await axios.post("/post", postData, {
       headers: {
