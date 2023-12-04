@@ -1,3 +1,5 @@
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 function performSignIn({ email, password, username }) {
   console.log("Submitting sign-in form...");
 
