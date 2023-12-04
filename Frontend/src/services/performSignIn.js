@@ -1,9 +1,9 @@
-const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/`;
 
 function performSignIn({ email, password, username }) {
   console.log("Submitting sign-in form...");
 
-  return fetch(`${import.meta.env.VITE_API_URL}api/auth/register`, {
+  return fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
