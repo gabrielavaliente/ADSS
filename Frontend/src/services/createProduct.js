@@ -11,9 +11,8 @@ const createProduct = async (productData, jwt) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
-      },
-      body: JSON.stringify(productData),
+        Authorization: `Bearer ${jwt}`
+      }
     });
 
     // Log Request and Response
