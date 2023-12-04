@@ -1,3 +1,5 @@
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 const getPosts = async () => {
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}api/post`);
