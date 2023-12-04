@@ -1,4 +1,4 @@
-
+import axios from "axios";
 
 const createPost = async (postData, jwt) => {
   if (!jwt) {
@@ -6,24 +6,15 @@ const createPost = async (postData, jwt) => {
   }
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}api/post`, {
-      method: "POST",
+    const response = await axios.post(`${import.meta.env.VITE_API_URL}api/post`, postData, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${jwt}`,
       },
-      body: JSON.stringify(postData),
     });
 
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      const errorMessage =
-        errorResponse.message || "Error desconocido al crear el post";
-      throw new Error(`Error al crear el post: ${errorMessage}`);
-    }
-
-    const data = await response.json();
-    return data;
+    // Axios automatically checks for response.ok, so you can simplify the code
+    return response.data;
   } catch (error) {
     console.error("Error al crear el post:", error.message);
     throw error;
