@@ -1,28 +1,31 @@
 import axios from "axios";
+import { login } from "./auth"; // Import the login function
 
 axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
-export const createPost = async (postData, jwt) => {
+const createPost = async (postData) => {
   try {
+    // Call the login function to obtain the JWT token
+    const jwtToken = await login({ identifier: /* username */, password: /* password */ });
+
+    // Use the obtained token for creating the post
     const response = await axios.post("/post", postData, {
       headers: {
-        Authorization: `Bearer ${jwt}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
     });
 
     if (response.status >= 200 && response.status < 300) {
-      // Success status code (2xx range)
       return response.data;
     } else {
-      // Handle non-success status code
-      return 405; // You may want to handle this differently based on your requirements
+      console.error(`Error al crear el post: ${response.status}`);
+      return 405;
     }
 
   } catch (error) {
-    console.log(error);
-    // You might want to throw the error here to propagate it to the calling code
+    console.error("Error al crear el post:", error.message);
     throw error;
   }
-}
+};
 
 export default createPost;
