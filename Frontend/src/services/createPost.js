@@ -1,5 +1,5 @@
 import axios from "axios";
-import { login } from "./auth"; // Import the login function
+import { login } from "./login.js"; 
 
 axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
 
