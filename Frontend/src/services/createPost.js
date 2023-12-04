@@ -15,7 +15,7 @@ export const createPost = async (postData, jwt) => {
 
     console.log("Response Data:", response.data);
 
-    if (response.status === 200) {
+    if (response.status === 201) {
       return response.data;
     } else {
       return 404;
