@@ -6,6 +6,8 @@ const createProduct = async (productData, jwt) => {
   }
 
   try {
+
+console.log('JWT Token:', jwt);
     const response = await fetch(`${import.meta.env.VITE_API_URL}api/product`, {
       method: "POST",
       headers: {
