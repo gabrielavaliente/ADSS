@@ -1,3 +1,5 @@
+const BASE_URL = `${import.meta.env.VITE_API_URL}api/`;
+
 const createPost = async (postData, jwt) => {
   if (!jwt) {
     throw new Error("No hay un token JWT válido");
