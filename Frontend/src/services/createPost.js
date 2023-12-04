@@ -1,14 +1,15 @@
 import axios from "axios";
 
-axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}api`;
+axios.defaults.baseURL = `${import.meta.env.VITE_API_URL}/api`;
 
 const createPost = async (postData, jwt) => {
   try {
+    console.log("JWT Token:", jwt);
     const response = await axios.post("/post", postData, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
-      },
-    });
+  headers: {
+    Authorization: `Bearer ${jwt}`,
+  },
+});
 
     if (response.status >= 200 && response.status < 300) {
       return response.data;
